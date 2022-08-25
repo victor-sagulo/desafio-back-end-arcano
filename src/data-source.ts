@@ -20,8 +20,8 @@ const devDataSourceOptions: DataSourceOptions = {
   ssl: false,
   synchronize: false,
   logging: true,
-  entities: ["dist/src/entities/*/*.ts"],
-  migrations: ["dist/src/migrations/*.ts"],
+  entities: ["src/entities/*/*.ts"],
+  migrations: ["src/migrations/*.ts"],
 };
 
 let currentDataSourceOptions =

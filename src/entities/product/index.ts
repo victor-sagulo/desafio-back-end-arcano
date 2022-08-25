@@ -2,15 +2,31 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Cart } from "../cart";
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  readonly id: string;
+
+  @Column("varchar", { length: 128 })
+  title: string;
+
+  @Column("float8")
+  price: number;
 
   @Column()
-  title: string;
+  description: string;
+
+  @Column({ nullable: true })
+  image: string;
+
+  @ManyToOne(() => Cart, (cart) => cart.products, {
+    eager: true,
+    nullable: true,
+  })
+  cart: Cart;
 }
