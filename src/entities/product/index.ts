@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Cart } from "../cart";
+import { User } from "../user";
 
 @Entity()
 export class Product {
@@ -29,4 +30,7 @@ export class Product {
     nullable: true,
   })
   cart: Cart;
+
+  @ManyToOne(() => User, (user) => user.cart_history, { nullable: true })
+  user: User;
 }

@@ -1,4 +1,11 @@
-import { PrimaryGeneratedColumn, Entity, Column } from "typeorm";
+import {
+  PrimaryGeneratedColumn,
+  Entity,
+  Column,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
+import { Product } from "../product";
 
 @Entity()
 export class User {
@@ -34,4 +41,7 @@ export class User {
 
   @Column()
   phone: string;
+
+  @OneToMany(() => Product, (product) => product.user)
+  cart_history: Product[];
 }

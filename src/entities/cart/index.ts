@@ -19,7 +19,7 @@ export class Cart {
   user_id: User;
 
   @Column("date")
-  date: string;
+  date: Date;
 
   @OneToMany(() => Product, (product) => product.cart, { nullable: true })
   products: Product[];

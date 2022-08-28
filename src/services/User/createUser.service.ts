@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../errors";
-import { UserCreation } from "../../interfaces/User";
+import { IUserCreation } from "../../interfaces/User";
 import bcrypt from "bcrypt";
 
 export const createUserService = async ({
@@ -15,7 +15,7 @@ export const createUserService = async ({
   number,
   zipcode,
   phone,
-}: UserCreation) => {
+}: IUserCreation) => {
   const userRepository = AppDataSource.getRepository(User);
 
   const emailVerify = await userRepository.findOneBy({ email: email });

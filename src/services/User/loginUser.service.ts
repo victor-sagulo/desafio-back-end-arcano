@@ -24,7 +24,7 @@ export const UserLoginService = async ({ email, password }: UserLogin) => {
   const token = jwt.sign(
     { email: userFound.email, id: userFound.id },
     process.env.TOKEN_KEY as string,
-    { expiresIn: "24h" }
+    { expiresIn: "24h", subject: userFound.id }
   );
 
   return { AccessToken: token };

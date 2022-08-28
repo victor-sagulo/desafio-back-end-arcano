@@ -1,3 +1,16 @@
 import { Product } from "../../entities";
 
-export type ProductCreation = Omit<Product, "id">;
+export interface IProductCreation {
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+}
+
+export interface IProductUpdate {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+}
