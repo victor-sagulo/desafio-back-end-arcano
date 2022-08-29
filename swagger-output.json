@@ -1,0 +1,317 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio Back End Arcano",
+    "description": "Api de E-commerce",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Test server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Lists all registered Users",
+        "summary": "Users List",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create User",
+        "description": "User creation route",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "exmaples": {
+                "user": {
+                  "value": {
+                    "email": "email@email.com",
+                    "username": "UserName",
+                    "password": "strongPassword",
+                    "firstname": "First Name",
+                    "lastname": "Last Name",
+                    "city": "City",
+                    "street": "Street",
+                    "number": "Residential Number",
+                    "zipcode": "Zip Code",
+                    "phone": "Phone Number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "This email already exists"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "summary": "User Login",
+        "description": "User Login route",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUsers"
+              },
+              "exmaples": {
+                "user": {
+                  "value": {
+                    "email": "email@email.com",
+                    "password": "strongPassword"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "value": {
+                    "AccessToken": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Lists One specific User",
+        "summary": "List One User",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "description": "Lists all Products",
+        "summary": "Products List",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Products"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Product",
+        "description": "Product creation",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Products"
+              },
+              "exmaples": {
+                "user": {
+                  "value": {
+                    "title": "Product Name",
+                    "price": "Product price",
+                    "description": "Product description",
+                    "image": "Product image"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Lists One specific Product",
+        "summary": "List One User",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Products"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts": {
+      "get": {
+        "description": "Lists all Carts",
+        "summary": "Carts List",
+        "tags": ["Carts"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Carts"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart-history/user/{id}": {
+      "get": {
+        "description": "List User Shopping History ",
+        "summary": "User Cart History",
+        "tags": ["Carts"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Products"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Products": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "price": { "type": "number" },
+          "description": { "type": "string" },
+          "image": { "type": "string" }
+        }
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "username": { "type": "string" },
+          "password": { "type": "string" },
+          "firstname": { "type": "string" },
+          "lastname": { "type": "string" },
+          "city": { "type": "string" },
+          "street": { "type": "string" },
+          "number": { "type": "number" },
+          "zipcode": { "type": "string" },
+          "phone": { "type": "string" }
+        }
+      },
+      "LoginUsers": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "Carts": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "string" },
+          "date": { "type": "string" },
+          "products": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
